@@ -1,0 +1,319 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:adm="http://github.com/adminfaces"
+	template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="head-end">
+		<style type="text/css">
+.ui-grid-row .ui-grid-col-2, .ui-grid-row .ui-grid-col-10 {
+	padding: 0.5em 0;
+	margin-left: 10px;
+}
+
+.ui-orderlist .ui-orderlist-list {
+	height: auto;
+}
+
+.ui-orderlist .ui-grid-row .ui-grid-col-2, .ui-orderlist .ui-grid-row .ui-grid-col-10
+	{
+	padding: 0;
+}
+</style>
+	</ui:define>
+
+	<ui:define name="title">
+        Pesquisa Membro
+    </ui:define>
+
+	<ui:define name="description">
+        Pesquise de acordo com os filtros 
+    </ui:define>
+
+	<ui:define name="body">
+		<adm:breadcrumb title="Pesquisa Membro" />
+
+		<h:form>
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<p:commandButton action="cadastro-membro?faces-redirect=true"
+						ajax="false" icon="fa fa-plus" value="Novo"
+						styleClass="btn-primary" />
+					<p:spacer width="5" />
+					<p:commandButton value="Excluir Selecionado(s)" icon="fa fa-trash"
+						action="#{listaMembroMB.excluirSelecionados()}"
+						styleClass="btn-danger" process="@form" update="@form" />
+					<p:spacer width="5" />
+					<!-- <p:commandButton value="Olhar Selecionado(s)"
+						oncomplete="PF('membroSelecionados').show()"
+						update="@(.ui-dialog)" styleClass="btn-info" icon="fa fa-search" /> -->
+					<p:separator />
+
+
+					<p:dataTable id="membroTable" widgetVar="membroTable" rows="10"
+						value="#{listaMembroMB.membros}" var="membro"
+						rowKey="#{membro.id}"
+						selection="#{listaMembroMB.membroSelecionados}" paginator="true"
+						paginatorPosition="bottom"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+						currentPageReportTemplate="" rowsPerPageTemplate="5,10,15,20,30">
+
+						<p:column style="width:55px;text-align: center">
+							<p:commandButton update="@(.ui-dialog)"
+								oncomplete="PF('membroSelecionados').show()"
+								icon="ui-icon-search" title="Visualizar">
+								<f:setPropertyActionListener value="#{membro}"
+									target="#{listaMembroMB.selectedMembro}" />
+							</p:commandButton>
+
+						</p:column>
+
+						<p:column selectionMode="multiple" width="5%"
+							styleClass="align-center" />
+						<p:column headerText="Nome" filterBy="#{membro.nome}"
+							sortBy="#{membro.nome}" filterMatchMode="contains">
+							<h:link value="#{membro.nome}" outcome="cadastro-membro.xhtml">
+								<f:param name="id" value="#{membro.id}" />
+							</h:link>
+						</p:column>
+						
+						<p:column headerText="RG" filterBy="#{membro.rg}"
+							sortBy="#{membro.rg}" filterMatchMode="contains">
+							<h:outputLabel value="#{membro.rg}" />
+						</p:column>
+						
+
+						<p:column headerText="CPF" filterBy="#{membro.cpf}"
+							sortBy="#{membro.cpf}" filterMatchMode="contains">
+							<h:outputLabel value="#{membro.cpf}" />
+						</p:column>
+
+						<p:column headerText="Foto">
+							<p:graphicImage cache="false" height="50" width="50"
+								url="http://localhost:8080/uploads/#{membro.rg}.png" />
+
+						</p:column>
+					</p:dataTable>
+
+				</div>
+			</div>
+		</h:form>
+
+		<p:dialog header="Visualizar Membro" widgetVar="membroSelecionados"
+			height="650" width="1000" responsive="true" styleClass="box-success">
+			<!-- <p:dataList id="listaMembroSelecionados"
+				value="#{listaMembroMB.membroSelecionados}" var="membro"
+				type="definition">
+				
+				ID: #{membro.id} - Título: #{membro.nome} - Descrição: #{membro.cpf} 
+
+			</p:dataList> -->
+			<h:form id="form" prependId="false">
+
+				<p:focus />
+
+				<div
+					style="background-color: #eee; height: 25px; width: 100%; border: 1px solid #ccc; text-align: center; margin-bottom: 15px;">
+					<b style="color: #222;">Dados Pessoais</b><br />
+				</div>
+
+
+				<p:panelGrid columns="4" layout="grid"
+					rendered="#{not empty listaMembroMB.selectedMembro}">
+
+					<p:outputLabel value="Nome" for="nome" />
+					<p:inputText id="nome" value="#{listaMembroMB.selectedMembro.nome}"
+						readonly="true" />
+
+					<p:outputLabel value="RG" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.rg}"
+						readonly="true" />
+
+					<p:outputLabel value="CPF" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.cpf}"
+						readonly="true" />
+
+					<p:outputLabel value="Telefone:" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.telefone}"
+						readonly="true" />
+
+
+					<p:outputLabel value="Celular:" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.celular}"
+						readonly="true" />
+
+					<p:outputLabel value="Endereço" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.endereco}"
+						readonly="true" />
+
+					<p:outputLabel value="Profissão" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.profissao}"
+						readonly="true" />
+
+					<p:outputLabel value="Escolaridade" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.escolaridade}"
+						readonly="true" />
+
+					<p:outputLabel value="Naturalidade" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.nacionalidade}"
+						readonly="true" />
+
+
+
+					<p:outputLabel value="Estado Civil" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.estado_civil}"
+						readonly="true" />
+
+					<p:outputLabel value="Conjugue" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.conjugue}"
+						readonly="true" />
+
+
+					<p:outputLabel value="Idade" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.idade}"
+						readonly="true" />
+
+					<p:outputLabel value="Sexo:" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.sexo}"
+						readonly="true" />
+
+					<p:outputLabel value="E-mail" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.email}"
+						readonly="true" />
+
+					<p:outputLabel value="Data de Nascimento:" />
+					<p:inputText
+						value="#{listaMembroMB.selectedMembro.data_nascimento}"
+						readonly="true" />
+
+
+					<p:outputLabel value="UF" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.estado}"
+						readonly="true" />
+
+					<p:outputLabel value="Data de Casamento:" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.data_casamento}"
+						readonly="true" />
+
+
+					<p:outputLabel value="Cidade:" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.cidade}"
+						readonly="true" />
+
+				</p:panelGrid>
+
+				<div
+					style="background-color: #eee; height: 25px; width: 100%; border: 1px solid #ccc; text-align: center; margin-bottom: 15px;">
+					<b style="color: #222;">Filiação</b><br />
+				</div>
+				<p:panelGrid columns="2" id="filiacao"
+					columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid"
+					styleClass="ui-panelgrid-blank">
+
+					<p:outputLabel value="Nome Pai" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.pai}"
+						readonly="true" />
+					<p:outputLabel value="Nome Mãe" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.mae}"
+						readonly="true" />
+
+
+				</p:panelGrid>
+
+
+				<div
+					style="background-color: #eee; height: 25px; width: 100%; border: 1px solid #ccc; text-align: center; margin-bottom: 15px;">
+					<b style="color: #222;">Dados da igreja</b><br />
+				</div>
+
+				<p:panelGrid columns="4" clayout="grid"
+					styleClass="ui-panelgrid-blank">
+
+					<p:outputLabel value="Congregação" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.igreja.nome}"
+						readonly="true" />
+
+					<p:outputLabel value="Data de Batismo: " />
+					<p:inputText value="#{listaMembroMB.selectedMembro.data_batismo}"
+						readonly="true" />
+
+					<p:outputLabel value="Data de Entrada:" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.entrada_igreja}"
+						readonly="true" />
+
+
+					<p:outputLabel value="Igreja de Batismo" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.igreja_batismo}"
+						readonly="true" />
+
+					<p:outputLabel value="Cargo" />
+					<p:inputText value="#{listaMembroMB.selectedMembro.cargo}"
+						readonly="true" />
+
+
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+		<h:form id="formulario"
+			style=" height:450px;width:900x; padding: 20px; margin-left:160px; min-height:200px;">
+			<p:panel header="Pesquisa de Registro">
+				<h:panelGrid columns="3">
+					<p:outputLabel for="cpf" value="CPF:" />
+					<p:inputMask mask="999.999.999-99" id="cpf" size="20"
+						maxlength="13" required="true"
+						requiredMessage="O campo codigo é obrigatório"
+						converterMessage="O valor informado no campo codigo é inválido"
+						value="#{cadastroMembroMB.membro.cpf}">
+					</p:inputMask>
+
+					<p:commandButton icon="ui-icon-search"
+						update=" :formulario:painelDados"
+						actionListener="#{cadastroMembroMB.buscarMembroPorCpf}"
+						process="@this :formulario:cpf" />
+				</h:panelGrid>
+
+				<h:panelGroup id="painelDados" layout="block">
+					<h:panelGrid columns="2"
+						rendered="#{cadastroMembroMB.exibePainelDados}">
+						<p:outputLabel value="Nome:" />
+						<h:outputText value="#{cadastroMembroMB.membro.nome}" />
+
+						<p:outputLabel value="CPF:" />
+						<h:outputText value="#{cadastroMembroMB.membro.cpf}"
+							converter="cpfconverter">
+						</h:outputText>
+
+						<p:outputLabel value="Endereço:" />
+						<h:outputText value="#{cadastroMembroMB.membro.endereco}" />
+
+						<p:outputLabel value="Cidade:" />
+						<h:outputText value="#{cadastroMembroMB.membro.cidade}" />
+
+						<p:outputLabel value="Estado:" />
+						<h:outputText value="#{cadastroMembroMB.membro.estado}" />
+
+						<h:panelGrid columns="1" cellpadding="5">
+							<p:commandButton value="FOTO" type="button"
+								onclick="PF('dlg1').show();" update="formArquivo" />
+						</h:panelGrid>
+
+						<p:dialog header="Auto de Apreensão" widgetVar="dlg1"
+							minHeight="40">
+							<h:form id="formArquivo" prepenId="false">
+								<p:graphicImage cache="true" height="500" width="500"
+									url="#{cadastroMembroMB.urlArquivo}">
+
+								</p:graphicImage>
+							</h:form>
+						</p:dialog>
+
+					</h:panelGrid>
+				</h:panelGroup>
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

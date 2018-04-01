@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:adm="http://github.com/adminfaces"
+	template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="title">
+        Cadastro Membro
+    </ui:define>
+
+	<ui:define name="body">
+		<f:metadata>
+			<f:viewParam name="id" value="#{cadastroMembroMB.idMembro}"
+				converter="javax.faces.Long" />
+			<f:event listener="#{cadastroMembroMB.inicializar()}"
+				type="preRenderView"></f:event>
+		</f:metadata>
+
+		<adm:breadcrumb title="Cadastro Membro #{cadastroMembroMB.membro.id}"
+			link="cadastro-membro.xhtml?id=#{cadastroMembroMB.membro.id}" />
+		<h:form id="form" prependId="false">
+
+			<p:focus />
+
+
+			<div class="box box-primary">
+				<div class="box-header with-border">
+
+
+					<div
+						style="background-color: #eee; height: 25px; width: 100%; border: 1px solid #ccc; text-align: center; margin-bottom: 15px;">
+						<b style="color: #222;">Dados Pessoais</b><br />
+					</div>
+
+					<div class="ui-fluid">
+
+						<p:panelGrid columns="1" layout="grid">
+
+							<p:outputLabel value="Foto" for="foto" />
+							<p:fileUpload id="foto"
+								fileUploadListener="#{cadastroMembroMB.carregarFoto}"
+								label="Escolher" uploadLabel="Enviar" cancelLabel="Cancelar"
+								mode="advanced" dragDropSupport="true" multiple="false"
+								auto="true" fileLimit="5" sizeLimit="900000"
+								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+
+						</p:panelGrid>
+
+						<p:panelGrid columns="4" layout="grid">
+
+							<p:outputLabel value="Nome" for="nome" />
+							<p:inputText id="nome" value="#{cadastroMembroMB.membro.nome}"
+								required="true" requiredMessage="O campo 'Nome' é obrigatório" />
+
+							<p:outputLabel value="RG" for="rg" />
+							<p:inputMask id="rg" value="#{cadastroMembroMB.membro.rg}"
+								mask="9-999.999" />
+
+							<p:outputLabel value="CPF" for="cpf" />
+							<p:inputMask id="cpf" value="#{cadastroMembroMB.membro.cpf}"
+								mask="999.999.999-99" />
+
+							<p:outputLabel value="Telefone:" for="telefone" />
+							<p:inputMask id="telefone"
+								value="#{cadastroMembroMB.membro.telefone}"
+								mask="(99) 99999-9999" />
+
+
+							<p:outputLabel for="celular" value="Celular:" />
+							<p:inputMask id="celular"
+								value="#{cadastroMembroMB.membro.celular}"
+								mask="(99) 99999-9999" />
+
+							<p:outputLabel value="Endereço" for="endereco" />
+							<p:inputText id="endereco"
+								value="#{cadastroMembroMB.membro.endereco}" />
+
+							<p:outputLabel value="Profissão" for="profissao" />
+							<p:inputText id="profissao"
+								value="#{cadastroMembroMB.membro.profissao}" />
+
+							<p:outputLabel for="escolaridade" value="Escolaridade" />
+							<p:selectOneMenu id="escolaridade"
+								value="#{cadastroMembroMB.membro.escolaridade}">
+								<f:selectItem itemLabel="Selecione " itemValue="" />
+								<f:selectItem itemLabel="Ensino Fundamental"
+									itemValue="Ensino Fundamental" />
+								<f:selectItem itemLabel="Ensino Médio" itemValue="Ensino Médio" />
+								<f:selectItem itemLabel="Ensino Superior"
+									itemValue="Ensino Superior" />
+							</p:selectOneMenu>
+
+
+							<p:outputLabel value="Naturalidade" for="naturalidade" />
+							<p:inputText id="naturalidade"
+								value="#{cadastroMembroMB.membro.nacionalidade}" />
+
+
+
+							<p:outputLabel for="estadoCivil" value="Estado Civil" />
+							<p:selectOneMenu id="estadoCivil"
+								value="#{cadastroMembroMB.membro.estado_civil}">
+								<f:selectItem itemLabel="Selecione Estado Civil" itemValue="" />
+								<f:selectItem itemLabel="Solteiro" itemValue="Solteiro" />
+								<f:selectItem itemLabel="Casado" itemValue="Casado" />
+								<f:selectItem itemLabel="Separado" itemValue="Separado" />
+								<f:selectItem itemLabel="Divorciado" itemValue="Divorciado" />
+								<f:selectItem itemLabel="VIÚVO" itemValue="VIÚVO" />
+							</p:selectOneMenu>
+
+							<p:outputLabel value="Conjugue" for="conjugue" />
+							<p:inputText id="conjugue"
+								value="#{cadastroMembroMB.membro.conjugue}" />
+
+
+
+							<p:outputLabel value="Idade" for="idade" />
+							<p:inputText id="idade" value="#{cadastroMembroMB.membro.idade}" />
+
+							<p:outputLabel value="Sexo:" />
+							<p:selectOneRadio value="#{cadastroMembroMB.membro.sexo}">
+								<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+								<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+							</p:selectOneRadio>
+
+							<p:outputLabel value="E-mail" for="email" />
+							<p:inputText id="email" value="#{cadastroMembroMB.membro.email}" />
+
+							<p:outputLabel value="Data de Nascimento: *" for="dataN" />
+							<p:calendar id="dataN"
+								value="#{cadastroMembroMB.membro.data_nascimento}"
+								locale="pt_BR" pattern="dd/MM/yyyy" mask="true" showOn="button" />
+
+
+							<p:outputLabel for="uf" value="UF" />
+							<p:selectOneMenu id="uf"
+								value="#{cadastroMembroMB.membro.estado}">
+								<f:selectItem itemLabel="Selecione um Estado" itemValue="" />
+								<f:selectItem itemLabel="DF" itemValue="DF" />
+								<f:selectItem itemLabel="GO" itemValue="GO" />
+							</p:selectOneMenu>
+
+							<p:outputLabel value="Data de Casamento: *" for="dataC" />
+							<p:calendar id="dataC"
+								value="#{cadastroMembroMB.membro.data_casamento}" locale="pt_BR"
+								pattern="dd/MM/yyyy" mask="true" showOn="button" />
+
+
+							<p:outputLabel for="Cidade" value="Cidade:" />
+							<p:selectOneMenu id="Cidade"
+								value="#{cadastroMembroMB.membro.cidade}">
+
+								<f:selectItem itemLabel="Selecione uma Cidade" itemValue="" />
+								<f:selectItem itemLabel="BRASÍLIA" itemValue="BRASÍLIA" />
+								<f:selectItem itemLabel="GAMA" itemValue="GAMA" />
+								<f:selectItem itemLabel="TAGUATINGA" itemValue="TAGUATINGA" />
+								<f:selectItem itemLabel="BRAZLANDIA" itemValue="BRAZLANDIA" />
+								<f:selectItem itemLabel="SOBRADINHO 1" itemValue="SOBRADINHO 1" />
+								<f:selectItem itemLabel="PLANALTINA" itemValue="PLANALTINA" />
+								<f:selectItem itemLabel="PARANOA" itemValue="PARANOA" />
+								<f:selectItem itemLabel="NUCLEO BANDEIRANTE"
+									itemValue="NUCLEO BANDEIRANTE" />
+								<f:selectItem itemLabel="GUARA" itemValue="GUARA" />
+								<f:selectItem itemLabel="SAMAMBAIA" itemValue="SAMAMBAIA" />
+								<f:selectItem itemLabel="SANTA MARIA" itemValue="SANTA MARIA" />
+								<f:selectItem itemLabel="SAO SEBASTIAO"
+									itemValue="SAO SEBASTIAO" />
+								<f:selectItem itemLabel="SANTA MARIA" itemValue="SANTA MARIA" />
+								<f:selectItem itemLabel="RECANDO DAS EMAS"
+									itemValue="RECANDO DAS EMAS" />
+								<f:selectItem itemLabel="LAGO SUL" itemValue="LAGO SUL" />
+								<f:selectItem itemLabel="RIACHO FUNDO" itemValue="RIACHO FUNDO" />
+								<f:selectItem itemLabel="LAGO NORTE" itemValue="LAGO NORTE " />
+								<f:selectItem itemLabel="CANDANGOLANDIA"
+									itemValue="CANDANGOLANDIA" />
+								<f:selectItem itemLabel="AGUAS CLARAS" itemValue="AGUAS CLARAS" />
+								<f:selectItem itemLabel="RIACHO FUNDO 2"
+									itemValue="RIACHO FUNDO 2" />
+								<f:selectItem itemLabel="SUDOESTE-OCTOGONAL"
+									itemValue="SUDOESTE-OCTOGONAL" />
+								<f:selectItem itemLabel="VARJAO" itemValue="VARJAO" />
+								<f:selectItem itemLabel="SCIA-ESTRUTURAL"
+									itemValue="SCIA-ESTRUTURAL" />
+								<f:selectItem itemLabel="SOBRADINHO 2" itemValue="SOBRADINHO 2" />
+								<f:selectItem itemLabel="SCIA-ESTRUTURAL"
+									itemValue="SCIA-ESTRUTURAL" />
+								<f:selectItem itemLabel="JARDIM BOTANICO"
+									itemValue="JARDIM BOTANICO" />
+								<f:selectItem itemLabel="ITAPOA" itemValue="ITAPOA" />
+								<f:selectItem itemLabel="SIA" itemValue="SIA" />
+								<f:selectItem itemLabel="VICENTE PIRES"
+									itemValue="VICENTE PIRES" />
+								<f:selectItem itemLabel="FERCAL" itemValue="FERCAL" />
+								<f:selectItem itemLabel="NOVO GAMA" itemValue="NOVO GAMA" />
+							</p:selectOneMenu>
+
+
+						</p:panelGrid>
+
+						<div
+							style="background-color: #eee; height: 25px; width: 100%; border: 1px solid #ccc; text-align: center; margin-bottom: 15px;">
+							<b style="color: #222;">Filiação</b><br />
+						</div>
+						<p:panelGrid columns="2" id="filiacao"
+							columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid"
+							styleClass="ui-panelgrid-blank">
+
+							<p:outputLabel value="Nome Pai" for="pai" />
+							<p:inputText id="pai" value="#{cadastroMembroMB.membro.pai}" />
+
+							<p:outputLabel value="Nome Mãe" for="mae" />
+							<p:inputText id="mae" size="300"
+								value="#{cadastroMembroMB.membro.mae}" />
+
+
+						</p:panelGrid>
+
+
+						<div
+							style="background-color: #eee; height: 25px; width: 100%; border: 1px solid #ccc; text-align: center; margin-bottom: 15px;">
+							<b style="color: #222;">Dados da igreja</b><br />
+						</div>
+
+						<p:panelGrid columns="3" id="painelmembro"
+							columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid"
+							styleClass="ui-panelgrid-blank">
+
+
+							<p:outputLabel value="Congregação" for="congregacao" />
+							<p:inputText id="congregacao" value="#{cadastroMembroMB.nome}"
+								readonly="true" />
+
+							<p:commandButton icon="ui-icon-search" title="Pesquisa"
+								onclick="PF('abrir').show();" process="@this" update="@none"
+								style="background:#1f89ce;color:#ffffff;width:40px; height:30px; margin-left:-10px; margin-top:1px;">
+							</p:commandButton>
+
+
+						</p:panelGrid>
+
+
+
+						<p:panelGrid columns="4" clayout="grid"
+							styleClass="ui-panelgrid-blank">
+
+							<p:outputLabel value="Data de Batismo: *" for="dataB" />
+							<p:calendar id="dataB"
+								value="#{cadastroMembroMB.membro.data_batismo}" locale="pt_BR"
+								pattern="dd/MM/yyyy" mask="true" showOn="button" />
+
+							<p:outputLabel value="Data de Entrada: *" for="dataEnt" />
+							<p:calendar id="dataEnt"
+								value="#{cadastroMembroMB.membro.entrada_igreja}" locale="pt_BR"
+								pattern="dd/MM/yyyy" mask="true" showOn="button" />
+
+							<p:outputLabel value="Igreja de Batismo" for="igrejaBatismo" />
+							<p:inputText id="igrejaBatismo"
+								value="#{cadastroMembroMB.membro.igreja_batismo}" />
+
+							<p:outputLabel for="cargo" value="Cargo" />
+							<p:selectOneMenu id="cargo"
+								value="#{cadastroMembroMB.membro.cargo}">
+								<f:selectItem itemLabel="Selecione um Cargo" itemValue="" />
+
+								<f:selectItem itemLabel="pastor" itemValue="pastor" />
+								<f:selectItem itemLabel="auxiliar" itemValue="auxiliar" />
+								<f:selectItem itemLabel="diácono" itemValue="diácono" />
+								<f:selectItem itemLabel="diaconisa" itemValue="diaconisa" />
+								<f:selectItem itemLabel="presbítero" itemValue="presbítero" />
+								<f:selectItem itemLabel="evangelista" itemValue="evangelista" />
+								<f:selectItem itemLabel="missionária" itemValue="missionária" />
+								<f:selectItem itemLabel="missionário" itemValue="missionário" />
+								<f:selectItem itemLabel="bispo" itemValue="bispo" />
+							</p:selectOneMenu>
+
+							<p:outputLabel for="ativo" value="Ativo:" />
+							<p:selectBooleanCheckbox id="ativo"
+								value="#{cadastroMembroMB.membro.ativo}" required="true"
+								requiredMessage="O campo 'Ativo' é obrigatório" />
+
+						</p:panelGrid>
+
+						<div
+							style="background-color: #eee; height: 25px; width: 100%; border: 1px solid #ccc; text-align: center; margin-bottom: 15px;">
+							<b style="color: #222;"></b><br />
+						</div>
+
+						<div id="main-buttons" class="hidden-sm hidden-xs">
+
+							<p:panelGrid columns="4" clayout="grid"
+								styleClass="ui-panelgrid-blank">
+
+								<p:commandButton value="Salvar" update="@form"
+									action="#{cadastroMembroMB.salvar()}" icon="fa fa-check"
+									styleClass="btn-primary" />
+								<p:spacer width="5" />
+
+								<p:commandButton value="Excluir" process="@this"
+									rendered="#{cadastroMembroMB.membro.edicao}"
+									action="#{cadastroMembroMB.excluir()}" icon="fa fa-trash"
+									styleClass="btn-danger">
+								</p:commandButton>
+								<p:spacer width="5" />
+
+								<p:commandButton value="Voltar" immediate="true"
+									action="lista-membro?faces-redirect=true" process="@this"
+									icon="fa fa-close" />
+							</p:panelGrid>
+						</div>
+
+
+
+						<p:splitButton value="Salvar" update="@form" icon="fa fa-check"
+							action="#{cadastroMembroMB.salvar()}"
+							styleClass="hidden-md hidden-lg btn-primary">
+
+							<p:menuitem value="Excluir"
+								rendered="#{cadastroMembroMB.membro.edicao}"
+								action="#{cadastroMemroMB.excluir()}" process="@this"
+								icon="fa fa-trash" />
+							<p:separator />
+
+							<p:menuitem value="Voltar"
+								action="lista-membro?faces-redirect=true" process="@this"
+								icon="fa fa-close" />
+						</p:splitButton>
+
+						<p:separator />
+
+						<p:dialog header="Seleção de Igrejas" widgetVar="abrir"
+							height="600" width="1000" responsive="true"
+							styleClass="box-success">
+							<h:form>
+								<p:panel>
+
+									<div style="margin-top: 5px; margin-bottom: 20px">
+										<p:inputText id="nome" size="40" placeholder="Nome da igreja" />
+
+										<p:spacer width="10px" />
+
+										<!-- <p:commandButton value="Pesquisa"
+								action="#{contribuinteBean.buscarContribuinte}" update="@form" /> -->
+									</div>
+
+									<p:dataTable id="tabela"
+										emptyMessage="Nenhum registro encontrado." paginator="true"
+										value="#{listaIgrejaMB.igrejas}" var="igreja"
+										paginatorPosition="top" widgetVar="igreja">
+
+										<p:column headerText="Código"
+											style="text-align: center; width: 55px;  ">
+											<h:outputText value="#{igreja.id}" />
+										</p:column>
+										<p:column headerText="Nome">
+											<h:outputText value="#{igreja.nome}" />
+										</p:column>
+										<p:column style="width: 35px; text-align: center">
+											<p:commandButton icon="ui-icon-check" title="Selecionar"
+												actionListener="#{cadastroMembroMB.selecionar(igreja)}"
+												update=" :form:painelmembro " process="@this"
+												oncomplete="PF('abrir').hide();" />
+										</p:column>
+
+									</p:dataTable>
+									
+
+								</p:panel>
+							</h:form>
+						</p:dialog>
+
+
+					</div>
+				</div>
+			</div>
+
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	template="/WEB-INF/templates/template.xhtml">
+
+
+
+	<ui:define name="head-end">
+		<ui:param name="renderBreadCrumb" value="false" />
+	</ui:define>
+
+
+	<ui:define name="title">
+
+			<h2 class="align-center">
+				Bem vindo ao Sistema <span class="text-aqua"> <i><a
+						href="https://pt-br.facebook.com/Ademme-278307135538655/"
+						target="_blank"
+						style="text-transform: none; text-decoration: none"> ADEMME</a></i></span>!
+
+				    <!-- <small>Utilizando <p:link value="Primefaces" href="http://primefaces.org" target="_blank"/>, <p:link value="Bootstrap"
+                                                                                                  href="http://getbootstrap.com/" target="_blank"/> e
+                <p:link value="Admin LTE" href="https://almsaeedstudio.com/themes/AdminLTE/index2.html" target="_blank"/> com
+                <p:link value="JSF" href="https://javaserverfaces.java.net/" target="_blank"/>.
+            </small>  -->
+			</h2>
+			 <img src="#{resource['images/log.ico']}" width="1010" height="500"
+			style="padding-top: -500px;"
+			 /> 		
+	</ui:define>
+
+
+</ui:composition>

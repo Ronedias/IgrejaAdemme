@@ -1,0 +1,287 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:adm="http://github.com/adminfaces"
+	template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="head-end">
+		<style type="text/css">
+.ui-grid-row .ui-grid-col-2, .ui-grid-row .ui-grid-col-10 {
+	padding: 0.5em 0;
+	margin-left: 10px;
+}
+
+.ui-orderlist .ui-orderlist-list {
+	height: auto;
+}
+
+.ui-orderlist .ui-grid-row .ui-grid-col-2, .ui-orderlist .ui-grid-row .ui-grid-col-10
+	{
+	padding: 0;
+}
+</style>
+	</ui:define>
+	<ui:define name="body">
+
+		<h:form id="form" prependId="false">
+			<p:growl autoUpdate="true" life="4000" />
+
+			<h2 class="align-center">
+				Bem vindo ao Sistema <span class="text-aqua"> <i><a
+						href="https://pt-br.facebook.com/Ademme-278307135538655/"
+						target="_blank"
+						style="text-transform: none; text-decoration: none"> ADEMME</a></i></span>!
+			</h2>
+			<div class="page-header">
+				<p:panel style="float:left;overflow-y: auto; width: 100%">
+					<p:panelGrid columns="3"
+						style="width: 100%;align:left;background-color: transparent !important;"
+						styleClass="ui-panelgrid-blank">
+
+						<p:panelGrid columns="1"
+							style="margin: 0 auto;border: none;background-color: #cce6ff !important;border-radius: 15px !important;width: 200px !important;"
+							styleClass="ui-panelgrid-blank">
+							<p:row>
+								<center>
+									<h2>
+										<span>Ademme Quadra 15</span>
+									</h2>
+								</center>
+								<center>
+									<h2>#{listaMembroMB.totalCadastrado}</h2>
+								</center>
+								<p:selectOneRadio id="radioFiltroTodosQ15"
+									value="#{listaMembroMB.radioPesquisaQ15}" layout="grid"
+									columns="1">
+									<f:selectItem itemLabel="Todos" itemValue="todos" />
+									<f:selectItem itemLabel="Inativos" itemValue="inativos" />
+								</p:selectOneRadio>
+								<br />
+								<center>
+									<p:commandButton icon="fa fa-search" iconPos="center"
+										action="#{listaMembroMB.pesquisarMembrosQuadra15()}"
+										styleClass="default" update=":tbMembros" />
+								</center>
+							</p:row>
+						</p:panelGrid>
+
+						<p:panelGrid columns="1"
+							style="margin: 0 auto;border: none;background-color: #b3ffb3  !important;border-radius: 15px !important;width: 200px !important;"
+							styleClass="ui-panelgrid-blank">
+							<p:row>
+								<center>
+									<h2>
+										<span>Ademme Sede</span>
+									</h2>
+								</center>
+								<center>
+									<h2>#{listaMembroMB.totalCadastradoSede}</h2>
+								</center>
+
+								<p:selectOneRadio id="radioFiltroTodosSede"
+									value="#{listaMembroMB.radioPesquisaSede}" layout="grid"
+									columns="1">
+
+									<f:selectItem itemLabel="Todos" itemValue="todos" />
+									<f:selectItem itemLabel="Inativos" itemValue="inativos" />
+								</p:selectOneRadio>
+								<br />
+								<center>
+									<p:commandButton icon="fa fa-search" iconPos="center"
+										action="#{listaMembroMB.pesquisarMembrosSede()}"
+										styleClass="default" update=":tbMembros" />
+								</center>
+							</p:row>
+						</p:panelGrid>
+
+						<p:panelGrid columns="1"
+							style="margin: 0 auto;border: none;background-color: #cce6ff !important;border-radius: 15px !important;width: 200px !important;"
+							styleClass="ui-panelgrid-blank">
+							<p:row>
+								<center>
+									<h2>
+										<span>Ademme Sobradinho</span>
+									</h2>
+								</center>
+								<center>
+									<h2>#{listaMembroMB.totalCadastradoSobradinho}</h2>
+								</center>
+
+								<p:selectOneRadio id="radioFiltroSobradinho"
+									value="#{listaMembroMB.radioPesquisaSobradinho}" layout="grid"
+									columns="1">
+
+									<f:selectItem itemLabel="Todos" itemValue="todos" />
+									<f:selectItem itemLabel="Inativos" itemValue="inativos" />
+								</p:selectOneRadio>
+								<br />
+								<center>
+									<p:commandButton icon="fa fa-search" iconPos="center"
+										action="#{listaMembroMB.pesquisarMembrosIgrejaSobradinho()}"
+										styleClass="default" update=":tbMembros" />
+								</center>
+							</p:row>
+
+						</p:panelGrid>
+
+						<p:panelGrid columns="1"
+							style="margin: 0 auto;border: none;background-color: #cce6ff !important;border-radius: 15px !important;
+							width: 200px !important;"
+							styleClass="ui-panelgrid-blank">
+
+							<p:row>
+								<center>
+									<h2>
+										<span>Ademme Ilhéus</span>
+									</h2>
+								</center>
+								<center>
+									<h2>#{listaMembroMB.totalCadastradoIlheus}</h2>
+								</center>
+								<p:selectOneRadio id="radioFiltroIlheus"
+									value="#{listaMembroMB.radioPesquisaIheus}" layout="grid"
+									columns="1">
+									<f:selectItem itemLabel="Todos" itemValue="todos" />
+									<f:selectItem itemLabel="Inativos" itemValue="inativos" />
+								</p:selectOneRadio>
+								<br />
+								<center>
+									<p:commandButton icon="fa fa-search" iconPos="center"
+										action="#{listaMembroMB.pesquisarMembrosIgrejaIlheus()}"
+										styleClass="default" update=":tbMembros" />
+								</center>
+							</p:row>
+						</p:panelGrid>
+
+						<p:panelGrid columns="1"
+							style="margin: 0 auto;border: none;background-color: #cce6ff !important;border-radius: 15px !important;width: 200px !important;"
+							styleClass="ui-panelgrid-blank">
+							<p:row>
+								<center>
+									<h2>
+										<span>Ademme São Sebastião</span>
+									</h2>
+								</center>
+								<center>
+									<h2>#{listaMembroMB.totalCadastradosSao}</h2>
+								</center>
+								<p:selectOneRadio id="radioFiltroSaoSebastiao"
+									value="#{listaMembroMB.radioPesquisaSaoSebastiao}" layout="grid"
+									columns="1">
+									<f:selectItem itemLabel="Todos" itemValue="todos" />
+									<f:selectItem itemLabel="Inativos" itemValue="inativos" />
+								</p:selectOneRadio>
+								<br />
+								<center>
+									<p:commandButton icon="fa fa-search" iconPos="center"
+										action="#{listaMembroMB.pesquisarMembrosIgrejaSao()}"
+										styleClass="default" update=":tbMembros" />
+								</center>
+							</p:row>
+						</p:panelGrid>
+						
+						<p:panelGrid columns="1"
+							style="margin: 0 auto;border: none;background-color: #cce6ff !important;border-radius: 15px !important;width: 200px !important;"
+							styleClass="ui-panelgrid-blank">
+							<p:row>
+								<center>
+									<h2>
+										<span>Ademme Vila Rabelo</span>
+									</h2>
+								</center>
+								<center>
+									<h2>#{listaMembroMB.totalCadastradoVila}</h2>
+								</center>
+
+								<p:selectOneRadio id="radioFiltroTodosRabelo"
+									value="#{listaMembroMB.radioPesquisaRabelo}" layout="grid"
+									columns="1">
+
+									<f:selectItem itemLabel="Todos" itemValue="todos" />
+									<f:selectItem itemLabel="Inativos" itemValue="inativos" />
+								</p:selectOneRadio>
+								<br />
+								<center>
+									<p:commandButton icon="fa fa-search" iconPos="center"
+										action="#{listaMembroMB.pesquisarMembrosIgrejaVila()}"
+										styleClass="default" update=":form:tbMembros" />
+								</center>
+							</p:row>
+
+						</p:panelGrid>
+						
+
+					</p:panelGrid>
+				</p:panel>
+			</div>
+			<p:outputLabel id="totalMembros"
+				value="Lista de Membros da Igreja Selecionada" />
+			<div class="box box-primary">
+				<div class="box-header with-border">
+
+					<!-- <p:dataTable id="tbMembros" widgetVar="membroTable" rows="10"
+						value="#{listaMembroMB.membrosIgreja}" var="membro"
+						rowKey="#{membro.id}"
+						selection="#{listaMembroMB.membroSelecionados}" paginator="true"
+						paginatorPosition="bottom"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+						currentPageReportTemplate="" rowsPerPageTemplate="5,10,15,20,30">
+
+
+						<p:column headerText="Codigo" filterMatchMode="contains">
+							<h:outputText value="#{membro.id}" />
+						</p:column>
+
+						<p:column headerText="Nome" filterBy="#{membro.nome}"
+							filterMatchMode="contains">
+							<h:outputText value="#{membro.nome}" />
+						</p:column>
+
+						<p:column headerText="Cargo">
+							<h:outputText value="#{membro.cargo}" />
+						</p:column>
+
+					</p:dataTable> -->
+					
+					
+					<p:dataTable id="tbMembros" widgetVar="membroTable" rows="10"
+						value="#{listaMembroMB.membrosIgreja}" var="membro"
+						rowKey="#{membro.id}-#{membro.nome}"
+						selection="#{listaMembroMB.membroSelecionados}" paginator="true"
+						paginatorPosition="bottom"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+						currentPageReportTemplate="" rowsPerPageTemplate="5,10,15,20,30">
+
+
+						<p:column  headerText="Ação" style="width:55px;text-align: center">
+							<p:commandButton update="@(.ui-dialog)"
+								oncomplete="PF('membroSelecionados').show()"
+								icon="ui-icon-search" title="Visualizar">
+								<f:setPropertyActionListener value="#{membro}"
+									target="#{listaMembroMB.selectedMembro}" />
+							</p:commandButton>
+
+						</p:column>
+
+						<p:column headerText="Codigo" 
+							filterMatchMode="contains">
+							<h:outputText value="#{membro.id}" />
+						</p:column>
+
+						<p:column headerText="Nome" filterBy="#{membro.nome}"
+							filterMatchMode="contains">
+							<h:outputText value="#{membro.nome}" />
+						</p:column>
+						<p:column headerText="Cargo">
+							<h:outputText value="#{membro.cargo}" />
+						</p:column>
+					</p:dataTable>
+					
+				</div>
+			</div>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
