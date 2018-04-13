@@ -1,6 +1,8 @@
 package br.com.ademme.mb;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.ManagedBean;
 import javax.faces.view.ViewScoped;
@@ -9,8 +11,8 @@ import javax.inject.Named;
 
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.omnifaces.util.Messages;
-import org.omnifaces.util.Messages.Message;
 
+import br.com.ademme.CPFUtils.CPFUtils;
 import br.com.ademme.model.Usuario;
 import br.com.ademme.service.UsuarioService;
 
@@ -22,17 +24,23 @@ public class CadastroUsuarioMB implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Usuario usuario = new Usuario();
+	private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+	
 	private String confirmaSenha;
-
+	
 	private Long idUsuario;
 
 	@Inject
 	private UsuarioService usuarioService;
 
+	
+
 	public void inicializar() {
 		if (idUsuario != null) {
 			usuario = usuarioService.porId(idUsuario);
 		}
+		
+		
 	}
 
 	public String salvar() {
@@ -45,7 +53,7 @@ public class CadastroUsuarioMB implements Serializable {
 
 			if (usuario.getSenha().equals(usuario.getConfirmasenha())) {
 				usuarioService.salvar(usuario);
-				
+
 			} else {
 				Messages.addGlobalInfo("As senha não são iguais");
 				return "cadastro-usuario.xhtml?faces-redirect=true";
@@ -57,6 +65,10 @@ public class CadastroUsuarioMB implements Serializable {
 		}
 		return "lista-usuario.xhtml?faces-redirect=true";
 	}
+
+	
+
+	
 
 	public String excluir() {
 		usuarioService.excluir(usuario);
@@ -86,5 +98,17 @@ public class CadastroUsuarioMB implements Serializable {
 	public void setConfirmaSenha(String confirmaSenha) {
 		this.confirmaSenha = confirmaSenha;
 	}
+
+	public ArrayList<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(ArrayList<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	
+
+	
 
 }

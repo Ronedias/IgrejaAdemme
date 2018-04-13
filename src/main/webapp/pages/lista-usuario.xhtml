@@ -44,7 +44,7 @@
 					<p:spacer width="5" />
 					<p:commandButton value="Excluir Selecionado(s)" icon="fa fa-trash"
 						action="#{listaUsuarioMB.excluirSelecionados()}"
-						styleClass="btn-danger" update=":form:usuarioTable" />
+						styleClass="btn-danger" update=":form" />
 					<p:spacer width="5" />
 					<p:commandButton value="Olhar Selecionado(s)"
 						oncomplete="PF('usuarioSelecionadas').show()"
@@ -52,21 +52,22 @@
 					<p:separator />
 
 
-					<p:panel header="Pesquisa de Usuário">
+					<p:panel header="Pesquisa ">
 						<h:panelGrid id="painel" columns="2"
 							columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid"
 							styleClass="ui-panelgrid-blank">
 
-							<p:outputLabel for="nome" value="Nome:" />
-							<p:inputText id="nome"
-								requiredMessage="O campo 'Nome' é obrigatório" value="#" />
+							<p:outputLabel value="Nome:" for="nomeUsuario" />
+							<p:inputText id="nomeUsuario"
+								requiredMessage="O campo 'Nome' é obrigatório"
+								value="#{listaUsuarioMB.nomeUsuario}" />
 
-							<p:outputLabel value="CPF:*" />
+							<p:outputLabel value="CPF:*" for="nomeUsuario" />
 							<p:inputMask requiredMessage="O campo 'cpf' é obrigatório"
-								mask="999.999.999-99" value="#{cadastroUsuarioMB.usuario.cpf}" />
-							<p:commandButton 
-								ajax="false" icon="fa fa-plus" value="Novo"
-								styleClass="btn-primary" />
+								mask="999.999.999-99" value="#{listaUsuarioMB.cpf}" />
+							<p:commandButton ajax="false" icon="fa fa-search"
+								value="Pesquisar" styleClass="btn-primary" update="messages"
+								action="#{listaUsuarioMB.buscarUsuarioPorCpf()}" />
 
 
 						</h:panelGrid>
@@ -75,7 +76,7 @@
 
 
 
-					<p:dataTable id="usuarioTable" widgetVar="usuarioTable" rows="10"
+					<!-- <p:dataTable id="usuarioTable" widgetVar="usuarioTable" rows="10"
 						value="#{listaUsuarioMB.usuarios}" var="usuario"
 						rowKey="#{usuario.id}"
 						selection="#{listaUsuarioMB.usuarioSelecionados}" paginator="true"
@@ -116,6 +117,22 @@
 
 
 
+					</p:dataTable> 
+ -->
+					<p:separator />
+
+					<p:dataTable id="tbUsuarios" var="usuario"
+						value="#{listaUsuarioMB.usuarios}"
+						emptyMessage="Nenhum registro encontrado"
+						paginatorPosition="bottom" paginator="true" rowIndexVar="indice"
+						rows="15">
+						<p:column headerText="Nome" style="width:40%;">
+							<h:outputText value="#{usuario.nome}" />
+						</p:column>
+						
+						
+						
+						
 					</p:dataTable>
 				</div>
 			</div>
