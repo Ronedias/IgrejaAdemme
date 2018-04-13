@@ -73,12 +73,6 @@
 
 						<p:column selectionMode="multiple" width="5%"
 							styleClass="align-center" />
-
-						<p:column headerText="Codigo" filterMatchMode="contains">
-							<h:outputLabel value="#{igreja.id}" />
-						</p:column>
-
-
 						<p:column headerText="Nome" filterBy="#{igreja.nome}"
 							sortBy="#{igreja.nome}" filterMatchMode="contains">
 							<h:link value="#{igreja.nome}" outcome="cadastro-igreja.xhtml">

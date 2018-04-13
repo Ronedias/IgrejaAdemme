@@ -1,9 +1,13 @@
 package br.com.ademme.service;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.omnifaces.util.Messages;
 
@@ -20,6 +24,8 @@ public class UsuarioService implements Serializable{
 	@Inject
 	private UsuarioDAO usuarioDAO;
 	
+	@Inject
+	private EntityManager manager;
 
 
 	
@@ -37,14 +43,32 @@ public class UsuarioService implements Serializable{
 		}
 
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Usuario> pesquisarPorNome(String nome){
+		
+		List<Usuario> usuarios = (List<Usuario>) manager.createNamedQuery("usuario.pesquisarPorNome")
+				.setParameter("nome", "%"+nome.toUpperCase()+"%").getResultList();
+		return usuarios;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Usuario> pesquisarPorListaCpf(String cpf){
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		try{
+			 usuarios = (List<Usuario>) manager.createNamedQuery("usuario.pesquisarPorCpf")
+				.setParameter("cpf", cpf).getResultList();
+		}catch(NoResultException ex){
+			return null;
+		}
+		return usuarios;
+	}
+	
 
 	@Transacional
 	public void excluir(Usuario usuario) {
 		usuarioDAO.excluir(usuario);
 	}
-	
-		
-	
 
 	public List<Usuario> listAll() {
 		return usuarioDAO.listAll();
@@ -53,9 +77,5 @@ public class UsuarioService implements Serializable{
 	public Usuario porId(Long id) {
 		return usuarioDAO.porId(id);
 	}
-
-	
-	
-	
 	
 }

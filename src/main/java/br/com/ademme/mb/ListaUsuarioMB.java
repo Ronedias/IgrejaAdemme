@@ -11,6 +11,7 @@ import javax.inject.Named;
 
 import org.omnifaces.util.Messages;
 
+import br.com.ademme.CPFUtils.CPFUtils;
 import br.com.ademme.model.Usuario;
 import br.com.ademme.service.UsuarioService;
 
@@ -28,6 +29,10 @@ public class ListaUsuarioMB implements Serializable {
 	private List<Usuario> usuarioSelecionados = new ArrayList<>();
 	
 	private Usuario Usuarioselecionado;
+	private String nomeUsuario;
+	private String cpf;
+	private String cpfaux;
+	
 
 	@PostConstruct
 	public void inicializar() {
@@ -41,6 +46,22 @@ public class ListaUsuarioMB implements Serializable {
 		}
 
 		//Messages.addGlobalInfo("Usuario(s)  teste excluída(s) com sucesso!");
+	}
+	
+	public void pesquisarPorNome() {
+		this.usuarios = new ArrayList<Usuario>();
+		try {
+			if (!nomeUsuario.equals("")) {
+				this.usuarios = usuarioService.pesquisarPorNome(nomeUsuario);
+			} else {
+				cpfaux = CPFUtils.limparCpf(cpf); 
+				cpf = cpfaux;
+				this.usuarios = usuarioService.pesquisarPorListaCpf(cpf);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public List<Usuario> getUsuarios() {
@@ -66,5 +87,31 @@ public class ListaUsuarioMB implements Serializable {
 
 	public void setUsuarioselecionado(Usuario usuarioselecionado) {
 		Usuarioselecionado = usuarioselecionado;
+	}
+
+	public String getNomeUsuario() {
+		return nomeUsuario;
+	}
+
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getCpfaux() {
+		return cpfaux;
+	}
+
+	public void setCpfaux(String cpfaux) {
+		this.cpfaux = cpfaux;
 	}	
+	
+	
 }

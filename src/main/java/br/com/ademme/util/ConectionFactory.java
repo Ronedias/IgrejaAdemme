@@ -11,7 +11,7 @@ public class ConectionFactory {
 	try {
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
 		
-		String url = "jdbc:mysql://localhost/Ademme?user=root&password=root";
+		String url = "jdbc:mysql://localhost/ademme?user=roni&password=root";
 		conn = DriverManager.getConnection(url);
 		
 		status = "conectado com sucesso";

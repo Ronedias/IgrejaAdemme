@@ -12,6 +12,7 @@ import javax.inject.Named;
 import org.omnifaces.util.Messages;
 
 import br.com.ademme.model.Igreja;
+import br.com.ademme.model.Usuario;
 import br.com.ademme.service.IgrejaService;
 
 
@@ -28,12 +29,16 @@ public class ListaIgrejaMB implements Serializable {
 	private List<Igreja> igrejas = new ArrayList<>();
 	
 	private List<Igreja> igrejaSelecionadas = new ArrayList<>();
+	private Usuario usuarioLogado;
+	
 	
 	private Igreja Igrejaselecionada;
+	private Boolean btnExcluir;
 	
 	@PostConstruct
 	public void inicializar() {
 		igrejas = igrejaService.listAll();
+		this.btnExcluir = false;
 	}
 	
 	public void excluirSelecionados() {
@@ -67,6 +72,22 @@ public class ListaIgrejaMB implements Serializable {
 
 	public void setIgrejaselecionada(Igreja igrejaselecionada) {
 		Igrejaselecionada = igrejaselecionada;
+	}
+
+	public Boolean getBtnExcluir() {
+		return btnExcluir;
+	}
+
+	public void setBtnExcluir(Boolean btnExcluir) {
+		this.btnExcluir = btnExcluir;
+	}
+
+	public Usuario getUsuarioLogado() {
+		return usuarioLogado;
+	}
+
+	public void setUsuarioLogado(Usuario usuarioLogado) {
+		this.usuarioLogado = usuarioLogado;
 	}
 	
 }

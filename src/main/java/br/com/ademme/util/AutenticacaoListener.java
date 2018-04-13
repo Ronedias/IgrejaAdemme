@@ -1,4 +1,4 @@
-package br.com.ademme.util;
+/*package br.com.ademme.util;
 
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
@@ -53,4 +53,4 @@ public class AutenticacaoListener implements PhaseListener {
 	public PhaseId getPhaseId() {
 		return PhaseId.RESTORE_VIEW;
 	}
-}
+}*/

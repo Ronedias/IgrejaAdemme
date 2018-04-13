@@ -7,12 +7,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "usuario.pesquisarPorCpf", query = "select u from Usuario u where u.cpf=:cpf"),
+	@NamedQuery(name = "usuario.pesquisarPorNome" ,  query = "select u from Usuario u where upper(u.nome) like :nome"),
+})
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -53,7 +59,7 @@ public class Usuario implements Serializable {
 	@Column(length = 16)
 	private String telefone;
 	
-
+	@Email
 	@Column(length = 255)
 	private String email;
 

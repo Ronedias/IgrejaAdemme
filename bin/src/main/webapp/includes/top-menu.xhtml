@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<ul class="nav navbar-nav">
+
+
+		<li class="dropdown user user-menu">
+			<!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+         
+              <pe:gravatar id="userImage"
+                             value="nonexisting"/>   
+               
+                <span class="hidden-xs">Rone Dias</span>
+            </a>  -->
+		<li class="dropdown user user-menu"><a href="#"
+			class="dropdown-toggle" data-toggle="dropdown"> <img
+				src="#{resource['images/log.ico']}" class="user-image"
+				alt="User Image"></img> <span class="hidden-xs">
+				<h:outputText value="#{loginMB.usuario.nome}" /></span>
+		</a>
+			<ul class="dropdown-menu">
+				<!-- User image -->
+				<li class="user-header"><img
+					src="#{resource['images/log.ico']}" class="img-circle"
+					alt="User Image"></img>
+
+					<p>
+						<h:outputText value="#{loginMB.usuario.nome}" />
+					</p>
+					</li>
+				<!-- Menu Body -->
+				<li class="user-body">
+					
+						<div class="col-xs-4 text-center">
+							<a href="#">Deus</a>
+						</div>
+						<div class="col-xs-4 text-center">
+							<a href="#">é</a>
+						</div>
+						<div class="col-xs-4 text-center">
+							<a href="#">Fiel</a>
+						</div>
+					<!-- /.row -->
+				</li>
+				<!-- Menu Footer-->
+				<li class="user-footer">
+					<div class="pull-left">
+						<a href="#" class="btn btn-default btn-flat">Perfil</a>
+					</div>
+					<div class="pull-right">
+					<h:form>
+						<p:commandButton class="btn btn-default btn-flat"
+								action="#{loginMB.sair}"
+								value="Sair"   />
+					</h:form>
+					</div>
+				</li>
+			</ul>
+			</li>
+
+</li>	
+	</ul>
+
+
+</ui:composition>

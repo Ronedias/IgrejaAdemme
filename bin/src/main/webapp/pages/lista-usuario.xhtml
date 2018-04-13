@@ -53,38 +53,23 @@
 
 
 					<p:panel header="Pesquisa de Usuário">
-						<div class="container-fluid">
+						<h:panelGrid id="painel" columns="2"
+							columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid"
+							styleClass="ui-panelgrid-blank">
+
+							<p:outputLabel for="nome" value="Nome:" />
+							<p:inputText id="nome"
+								requiredMessage="O campo 'Nome' é obrigatório" value="#" />
+
+							<p:outputLabel value="CPF:*" />
+							<p:inputMask requiredMessage="O campo 'cpf' é obrigatório"
+								mask="999.999.999-99" value="#{cadastroUsuarioMB.usuario.cpf}" />
+							<p:commandButton 
+								ajax="false" icon="fa fa-plus" value="Novo"
+								styleClass="btn-primary" />
 
 
-							<div class="ui-fluid">
-								<p:panelGrid columns="2"
-									columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid"
-									styleClass="ui-panelgrid-blank">
-									<p:outputLabel value="Nome do Usuário" for="nomeUsuario" />
-									<p:inputText id="nomeUsuario" value="#{listaUsuarioMB.nomeUsuario}"/>
-								</p:panelGrid>
-
-								<p:panelGrid columns="2"
-									columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid"
-									styleClass="ui-panelgrid-blank">
-									<p:outputLabel value="CPF do Usuário" for="nomeUsuario" />
-									<p:inputMask id="cpfUsuario"
-										value="#{listaUsuarioMB.cpf}" mask="999.999.999-99" />
-								</p:panelGrid>
-							</div>
-
-							<div class="ui-g text-center">
-								<div class="ui-g-12">
-									<p:commandButton value="Pesquisar" 
-									action="#{listaUsuarioMB.pesquisarPorNome}" update="form"/>
-		
-
-									<p:commandButton value="Limpar" />
-
-								</div>
-							</div>
-
-						</div>
+						</h:panelGrid>
 					</p:panel>
 
 
@@ -137,7 +122,7 @@
 		</h:form>
 
 		<p:dialog header="Visualizar Usuario " widgetVar="usuarioSelecionado"
-			height="350" width="450" responsive="true" styleClass="box-success">
+			height="650" width="1000" responsive="true" styleClass="box-success">
 			<!-- <p:dataList id="listaUsuarioSelecionadas"
 				value="#{listaUsuarioMB.usuarioSelecionados}" var="usuario"
 				type="definition">

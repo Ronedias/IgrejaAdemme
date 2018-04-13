@@ -1,0 +1,99 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:adm="http://github.com/adminfaces"
+	template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="head-end">
+		<style type="text/css">
+.ui-grid-row .ui-grid-col-2, .ui-grid-row .ui-grid-col-10 {
+	padding: 0.5em 0;
+	margin-left: 10px;
+}
+
+.ui-orderlist .ui-orderlist-list {
+	height: auto;
+}
+
+.ui-orderlist .ui-grid-row .ui-grid-col-2, .ui-orderlist .ui-grid-row .ui-grid-col-10
+	{
+	padding: 0;
+}
+</style>
+	</ui:define>
+
+	<ui:define name="title">
+        Pesquisa Membro
+    </ui:define>
+
+	<ui:define name="body">
+		<adm:breadcrumb title="Pesquisa Membro" />
+
+
+		<h:form id="formulario"
+			style=" height:450px;width:900x; padding: 20px; margin-left:10px; min-height:200px;">
+
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<p:panel header="Pesquisa de Registro de Membro " >
+						<h:panelGrid columns="3">
+							<p:outputLabel for="cpf" value="CPF:" />
+							<p:inputMask mask="999.999.999-99" id="cpf" size="20"
+								maxlength="13" required="true"
+								requiredMessage="O campo codigo é obrigatório"
+								converterMessage="O valor informado no campo codigo é inválido"
+								value="#{cadastroMembroMB.membro.cpf}">
+							</p:inputMask>
+
+							<p:commandButton icon="ui-icon-search"
+								update=" :formulario:painelDados"
+								actionListener="#{cadastroMembroMB.buscarMembroPorCpf}"
+								process="@this :formulario:cpf" />
+						</h:panelGrid>
+
+						<h:panelGroup id="painelDados" layout="block">
+							<h:panelGrid columns="2"
+								rendered="#{cadastroMembroMB.exibePainelDados}">
+								<p:outputLabel value="Nome:" />
+								<h:outputText value="#{cadastroMembroMB.membro.nome}" />
+
+								<p:outputLabel value="CPF:" />
+								<h:outputText value="#{cadastroMembroMB.membro.cpf}"
+									converter="cpfconverter">
+								</h:outputText>
+
+								<p:outputLabel value="Endereço:" />
+								<h:outputText value="#{cadastroMembroMB.membro.endereco}" />
+
+								<p:outputLabel value="Cidade:" />
+								<h:outputText value="#{cadastroMembroMB.membro.cidade}" />
+
+								<p:outputLabel value="Estado:" />
+								<h:outputText value="#{cadastroMembroMB.membro.estado}" />
+
+								<h:panelGrid columns="1" cellpadding="5">
+									<p:commandButton value="FOTO" type="button"
+										onclick="PF('dlg1').show();" update="formArquivo" />
+								</h:panelGrid>
+
+								<p:dialog header="Auto de Apreensão" widgetVar="dlg1"
+									minHeight="40">
+									<h:form id="formArquivo" prepenId="false">
+										<p:graphicImage cache="true" height="500" width="500"
+											url="#{cadastroMembroMB.urlArquivo}">
+
+										</p:graphicImage>
+									</h:form>
+								</p:dialog>
+							</h:panelGrid>
+						</h:panelGroup>
+					</p:panel>
+				</div>
+			</div>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

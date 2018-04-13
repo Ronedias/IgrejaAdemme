@@ -48,14 +48,16 @@ public class MembroService implements Serializable {
 
 			Path origem = Paths.get(membro.getCaminhoImg());
 			Path destino = Paths.get("/opt/Ademme/Uploads/" + membro.getRg() + ".png");
+		
 			Files.copy(origem, destino, StandardCopyOption.REPLACE_EXISTING);
 			membro.setCpf(CPFUtils.limparCpf(membro.getCpf()));
 			membroDAO.salvar(membro);
 
 			Messages.addGlobalInfo("Membro salvo com sucesso");
 		} catch (RuntimeException | IOException erro) {
-			Messages.addGlobalError("Ocorreu um erro ao tentar salvar o Membro");
 			erro.printStackTrace();
+			Messages.addGlobalError("Ocorreu um erro ao tentar salvar o Membro");
+			
 		}
 
 	}
@@ -168,7 +170,7 @@ public class MembroService implements Serializable {
 		BigInteger num = new BigInteger("0");
 
 		try {
-			String sql = "SELECT COUNT(id) FROM Membro where igreja_id = 11";
+			String sql = "SELECT COUNT(id) FROM Membro where igreja_id = 5";
 
 			num = (BigInteger) manager.createNativeQuery(sql).getSingleResult();
 			numero = num.longValue();
@@ -462,7 +464,7 @@ public class MembroService implements Serializable {
 
 		try {
 			conn = ConectionFactory.getConnection();
-			sql = "SELECT id,nome,data_nascimento,cargo,celular,cidade FROM Membro where igreja_id = 11";
+			sql = "SELECT id,nome,data_nascimento,cargo,celular,cidade FROM Membro where igreja_id = 5";
 
 			pst = conn.prepareStatement(sql);
 			rs = pst.executeQuery();
@@ -493,7 +495,7 @@ public class MembroService implements Serializable {
 
 		try {
 			conn = ConectionFactory.getConnection();
-			sql = "SELECT id,nome,data_nascimento,cargo,celular,cidade FROM Membro where igreja_id = 11 and ativo = 0";
+			sql = "SELECT id,nome,data_nascimento,cargo,celular,cidade FROM Membro where igreja_id = 5 and ativo = 0";
 
 			pst = conn.prepareStatement(sql);
 			rs = pst.executeQuery();

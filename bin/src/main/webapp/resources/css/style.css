@@ -1,0 +1,13 @@
+.btn-scrolltop {
+	display: none; position: fixed; bottom: 10px; right: 20px; width: 34px; height: 34px; color: rgb(238, 238, 238); line-height: 34px; text-align: center; background-color: rgb(34, 45, 50); cursor: pointer; border-radius: 3px; z-index: 99999; opacity: 0.7;
+}
+
+.button-painel{
+	position: center;
+	background:#1f89ce;
+	color:#fffcfc; 
+	height:30px; 
+	width:80px; 
+	margin-left:300px;
+	margin-top:5px;
+}
