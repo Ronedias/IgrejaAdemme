@@ -1,3 +1,7 @@
+<<<<<<< HEAD
 default.configuration=SISCOM
+=======
+default.configuration=IgrejaAdemme
+>>>>>>> 75079215d8f20673465477fea2dffd55f6e73f9b
 eclipse.preferences.version=1
 hibernate3.enabled=true

@@ -1,72 +1,40 @@
-<div class="container-fluid">
-	<p:panel id="panelOperacoes" header="Detalhes da Instrução de Serviço"
-		toggleable="true" style="margin-bottom:10px" collapsed="false">
-
-		<div class="row">
-			<div class="col-xs-6 col-sm-2 col-md-2">
-				<p:outputLabel value="Número" for="numero" />
-			</div>
-			<div class="col-xs-12 col-sm-10 col-md-10">
-				<h:outputText id="numero"
-					value="#{acaoFiscalBean.instrucaoServico.documento.numero}" />
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-xs-6 col-sm-2 col-md-2">
-				<p:outputLabel value="Início" for="dtInicio" />
-			</div>
-			<div class="col-xs-12 col-sm-10 col-md-10">
-				<h:outputText id="dtInicio"
-					value="#{acaoFiscalBean.instrucaoServico.dtInicio}"
-					converter="LocalDateConverter" />
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-6 col-sm-2 col-md-2">
-				<p:outputLabel value="Término" for="dtFim" />
-			</div>
-			<div class="col-xs-12 col-sm-10 col-md-10">
-				<h:outputText id="dtFim"
-					value="#{acaoFiscalBean.instrucaoServico.dtFim}"
-					converter="LocalDateConverter" />
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-6 col-sm-2 col-md-2">
-				<p:outputLabel value="Prazo" for="prazoIs" />
-			</div>
-			<div class="col-xs-12 col-sm-10 col-md-10">
-				<h:outputText id="prazoIs"
-					value="#{acaoFiscalBean.instrucaoServico.documento.prazo}" />
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-6 col-sm-2 col-md-2">
-				<p:outputLabel value="Descrição da Instrução"
-					for="descricaoInstrucao" />
-			</div>
-			<div class="col-xs-12 col-sm-10 col-md-10">
-				<h:outputText id="descricaoInstrucao"
-					value="#{acaoFiscalBean.instrucaoServico.documento.descricao}" />
-			</div>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	template="/WEB-INF/templates/template.xhtml">
 
 
-		</div>
-		<div class="row">
-			<div class="col-xs-6 col-sm-2 col-md-2">
-				<p:outputLabel value="Criador da Instrução" for="descricaoInstrucao" />
-			</div>
-			<div class="col-xs-12 col-sm-10 col-md-10">
-				<h:outputText
-					value="#{acaoFiscalBean.instrucaoServico.documento.usuario.nome}" />
-			</div>
-		</div>
 
-		<div class="row">
-			<div class="col-xs-6 col-sm-2 col-md-2">
-				<p:outputLabel value="Gestores da Instrução"
-					for="descricaoInstrucao" />
+
+
+
+	<ui:define name="title">
+		<form id="form">
+		
+		
+		
+		
+			<div>
+				<p:dataTable id="tbMembros" widgetVar="membroTable" rows="10"
+					value="#{listaUsuarioMB.returnusuarios}" var="usuario">
+
+					<p:column headerText="Codigo" filterMatchMode="contains">
+						<h:outputText value="#{usuario.nome}" />
+					</p:column>
+
+					<p:column headerText="Nome" 
+						filterMatchMode="contains">
+						<h:outputText value="#{usuario.cpf}" />
+					</p:column>
+					
+				</p:dataTable>
+
 			</div>
-			<div class="col-xs-12 col-sm-10 col-md-10">
-				<div class="datalist-noborder">
+		</form>
+
+	</ui:define>
+
+
+</ui:composition>

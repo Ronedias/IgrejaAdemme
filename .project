@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
 	<name>SISCOM</name>
+=======
+	<name>IgrejaAdemme</name>
+>>>>>>> 75079215d8f20673465477fea2dffd55f6e73f9b
 	<comment></comment>
 	<projects>
 	</projects>
@@ -49,8 +53,14 @@
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 		<nature>org.jboss.tools.jst.web.kb.kbnature</nature>
 		<nature>org.jboss.tools.cdi.core.cdinature</nature>
+<<<<<<< HEAD
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 		<nature>org.hibernate.eclipse.console.hibernateNature</nature>
 		<nature>org.jboss.tools.jsf.jsfnature</nature>
+=======
+		<nature>org.hibernate.eclipse.console.hibernateNature</nature>
+		<nature>org.jboss.tools.jsf.jsfnature</nature>
+		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
+>>>>>>> 75079215d8f20673465477fea2dffd55f6e73f9b
 	</natures>
 </projectDescription>

@@ -5,6 +5,10 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <property name="context-root" value="ProjetoAdemme"/>
+<<<<<<< HEAD
         <property name="java-output-path" value="/SISCOM/target/classes"/>
+=======
+        <property name="java-output-path" value="/IgrejaAdemme/target/classes"/>
+>>>>>>> 75079215d8f20673465477fea2dffd55f6e73f9b
     </wb-module>
 </project-modules>
