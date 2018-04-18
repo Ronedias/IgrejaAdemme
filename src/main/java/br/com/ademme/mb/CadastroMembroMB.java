@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.omnifaces.util.Messages;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -63,6 +64,7 @@ public class CadastroMembroMB implements Serializable {
 	public void selecionar(Igreja igreja) {
 		membro.setIgreja(igreja);
 		this.nome = igreja.getNome();
+		RequestContext.getCurrentInstance().update("painelmembro");
 	}
 
 	public String excluir() {
